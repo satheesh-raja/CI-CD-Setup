@@ -40,7 +40,6 @@ jobs:
         else
           echo ${{ github.event_name }}
         fi
-        echo ${{ env.NEED }}
 
     - name: Step 2
       run: |
