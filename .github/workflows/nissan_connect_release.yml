@@ -33,17 +33,17 @@ jobs:
       id: select-build-variant
       run: |
         if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
-          echo "NEED = This is a pull request event"  >> "$GITHUB_ENV"
+          echo "NEED = This is a pull request event"  >> "$GITHUB_OUTPUT"
         elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
-          echo "NEED = This is a push event" >> "$GITHUB_ENV"
+          echo "NEED = This is a push event" >> "$GITHUB_OUTPUT"
         elif [ ${{ inputs.buildvariant }} == 'NissanUaePreProd' ]; then
-          echo "NEED = This is a workflow dispatch event" >> "$GITHUB_ENV"
+          echo "NEED = This is a workflow dispatch event" >> "$GITHUB_OUTPUT"
         else
           echo ${{ github.event_name }}
         fi
     - name: Step 2
       env:
-          NEED: ${{ steps.select-build-variant.env.NEED }}
+          NEED: ${{ steps.select-build-variant.outputs.NEED }}
       run: |
         echo "BuildVariant is: $NEED"
 # jobs:
