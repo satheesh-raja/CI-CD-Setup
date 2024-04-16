@@ -43,7 +43,7 @@ jobs:
 
     - name: Step 2
       run: |
-        echo ${{ env.s }}
+        echo ${{ env.NEED }}
 # jobs:
 #   log-the-inputs:
 #     runs-on: ubuntu-latest
