@@ -31,12 +31,12 @@ jobs:
           echo "NEED=${{ inputs.buildvariant }}" >> "$GITHUB_ENV"
         if: env.NEED == 'NissanEuPreProd'
           echo "BuildVariant = EuPreProd" >> "$GITHUB_ENV"
-      - run: |
+      - name: condition1
         if: env.NEED == 'NissanEuProd'
-          echo "BuildVariant = EuProd" >> "$GITHUB_ENV"
-      - run: |
+        run:  echo "BuildVariant = EuProd" >> "$GITHUB_ENV"
+      - name: condition2
         if: env.NEED == 'EuProd'
-          echo "Success"
+        run: echo "Success"
           
   # log-the-inputs:
   #   runs-on: ubuntu-latest
