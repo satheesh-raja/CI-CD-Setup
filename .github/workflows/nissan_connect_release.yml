@@ -1,0 +1,64 @@
+#Work Flow Name
+name : Nissan CI/CD Workflow
+
+# When it will be triggered
+on:
+  workflow_dispatch:
+    inputs:
+      buildvariant:
+        type: choice
+        description: Select the Build Variant
+        options:
+          - NissanEuPreProd
+          - NissanEuProd
+          - NissanUaePreProd
+          - NissanUaeProd
+          - NissanAsiaPreProd
+          - NissanAsiaProd
+          - NissanAusPreProd
+          - NissanAusProd
+          - InfintiUaePreProd
+          - InfintiUaeProd
+          - InfintiUkrPreProd
+          - InfintiUkrProd
+
+# Where it will run
+jobs:
+  log-the-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "BuildVariant=${{ inputs.buildvariant }}" >> "$GITHUB_ENV"
+          if: env.BuildVariant == 'NissanEuPreProd'
+          echo "BundleVariant= bundleEuE2eProd" >> "$GITHUB_ENV"
+
+      - name: Print name
+        run: echo BundleVariant.env
+
+      - name: Checkout
+        uses: actions/checkout@v4.1.0
+      - name: Setup Java SDK 17s
+        uses: actions/setup-java@v3.13.0
+        with:
+          java-version : '17'
+          distribution : 'adopt'
+      - name: Cache Gradle and wrapper
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+
+      - name: Decode Keystore
+        run: echo "${{ secrets.JKSFILE_RELEASE_EU_E2E }}" | base64 --decode > /tmp/keystore.jks
+
+      - name: Build Release
+        run: ./gradlew BundleVariant -Pandroid.injected.signing.store.file=/tmp/keystore.jks -Pandroid.injected.signing.store.password=${{ secrets.JKSKEYPASSWORD_RELEASE_EU_E2E }} -Pandroid.injected.signing.key.alias=${{ secrets.JKSKEYALIAS_RELEASE_EU_E2E }} -Pandroid.injected.signing.key.password=${{ secrets.JKSPASSWORD_RELEASE_EU_E2E }}
+
+      - name: Upload a build Artifact
+        if: env.BuildVariant == 'NissanEuPreProd'
+        uses: actions/upload-artifact@v3.1.3
+        with:
+          name: NissanConnect.aab
+          path: app/build/outputs/bundle/eue2eProdRelease/app-eue2e-prod-release.aab
