@@ -37,8 +37,8 @@ jobs:
           echo "This is a pull request event"
         elif [ ${{ github.event_name }} == 'push' ]; then
           echo "This is a push event"
-        elif [ ${{ github.event_name }} == 'pushpull' ]; then
-          echo "This is a pushpull event"
+        elif [ ${{ github.event_name }} == 'workflow_dispatch' ]; then
+          echo "This is a workflow dispatch event"
         else
           echo ${{ github.event_name }}
         fi
