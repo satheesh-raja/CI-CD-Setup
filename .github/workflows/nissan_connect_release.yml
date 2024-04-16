@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-           echo "NEED=$LEVEL" >> "$GITHUB_ENV"
+           echo "NEED=${{ inputs.buildvariant }}" >> "$GITHUB_ENV"
         env:
           LEVEL: ${{ inputs.buildvariant }}
       - name: Skip Deploy?
