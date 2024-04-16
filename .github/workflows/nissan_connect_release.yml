@@ -29,7 +29,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - run: |
+    - name: Checkout code
+      id: select-build-variant
+      run: |
         if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
           echo "NEED = This is a pull request event"  >> "$GITHUB_ENV"
         elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
@@ -42,7 +44,7 @@ jobs:
 
     - name: Step 2
       run: |
-        echo "BuildVariant is: '${{ env.NEED }}'"
+        echo "BuildVariant is: '${{ steps.select-build-variant.env.NEED }}'"
 # jobs:
 #   log-the-inputs:
 #     runs-on: ubuntu-latest
