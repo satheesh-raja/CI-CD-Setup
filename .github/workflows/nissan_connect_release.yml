@@ -36,7 +36,7 @@ jobs:
         elif [ ${{ github.event_name }} == 'push' ]; then
           echo "NEED = This is a push event" >> "$GITHUB_ENV"
         elif [ ${{ github.event_name }} == 'workflow_dispatch' ]; then
-          echo "s = This is a workflow dispatch event" >> "$GITHUB_ENV"
+          echo "NEED = This is a workflow dispatch event" >> "$GITHUB_ENV"
         else
           echo ${{ github.event_name }}
         fi
