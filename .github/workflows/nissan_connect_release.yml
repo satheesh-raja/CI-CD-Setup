@@ -31,15 +31,16 @@ jobs:
       uses: actions/checkout@v3
     - name: What is the event?
       run: |
-        if [ ${{ github.event_name }} == 'pull_request' ]; then
+        if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
           echo "NEED = This is a pull request event"  >> "$GITHUB_ENV"
-        elif [ ${{ github.event_name }} == 'push' ]; then
+        elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
           echo "NEED = This is a push event" >> "$GITHUB_ENV"
-        elif [ ${{ github.event_name }} == 'workflow_dispatch' ]; then
+        elif [ ${{ inputs.buildvariant }} == 'NissanUaePreProd' ]; then
           echo "NEED = This is a workflow dispatch event" >> "$GITHUB_ENV"
         else
           echo ${{ github.event_name }}
         fi
+        echo ${{ env.NEED }}
 
     - name: Step 2
       run: |
