@@ -24,19 +24,36 @@ on:
 
 # Where it will run
 jobs:
-  log-the-inputs:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - run: |
-          echo "NEED=${{ inputs.buildvariant }}" >> "$GITHUB_ENV"
-        if: env.NEED == 'NissanEuPreProd'
-          echo "BuildVariant = EuPreProd" >> "$GITHUB_ENV"
-      - name: condition1
-        if: env.NEED == 'NissanEuProd'
-        run:  echo "BuildVariant = EuProd" >> "$GITHUB_ENV"
-      - name: condition2
-        if: env.NEED == 'EuProd'
-        run: echo "Success"
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: What is the event?
+      run: |
+        if [ ${{ github.event_name }} == 'pull_request' ]; then
+          echo "This is a pull request event"
+        elif [ ${{ github.event_name }} == 'push' ]; then
+          echo "This is a push event"
+        else
+          echo "This is an unknown event"
+        fi
+# jobs:
+#   log-the-inputs:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: |
+#           echo "NEED=${{ inputs.buildvariant }}" >> "$GITHUB_ENV"
+#         if: env.NEED == 'NissanEuPreProd'
+#           echo "BuildVariant = EuPreProd" >> "$GITHUB_ENV"
+#       - name: condition1
+#         if: env.NEED == 'NissanEuProd'
+#         run:  echo "BuildVariant = EuProd" >> "$GITHUB_ENV"
+#       - name: condition2
+#         if: env.NEED == 'EuProd'
+#         run: echo "Success"
           
   # log-the-inputs:
   #   runs-on: ubuntu-latest
