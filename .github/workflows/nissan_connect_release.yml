@@ -37,6 +37,8 @@ jobs:
           echo "This is a pull request event"
         elif [ ${{ github.event_name }} == 'push' ]; then
           echo "This is a push event"
+        elif [ ${{ github.event_name }} == 'pushpull' ]; then
+          echo "This is a pushpull event"
         else
           echo "This is an unknown event"
         fi
