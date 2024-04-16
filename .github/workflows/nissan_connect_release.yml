@@ -40,7 +40,7 @@ jobs:
         elif [ ${{ github.event_name }} == 'pushpull' ]; then
           echo "This is a pushpull event"
         else
-          echo $github.event_name
+          echo ${{ github.event_name }}
         fi
 # jobs:
 #   log-the-inputs:
