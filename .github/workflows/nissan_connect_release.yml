@@ -42,6 +42,10 @@ jobs:
         else
           echo ${{ github.event_name }}
         fi
+
+    - name: Step 2
+      run: |
+        echo "Output is: '${{ env.NEED }}'" # Output works
 # jobs:
 #   log-the-inputs:
 #     runs-on: ubuntu-latest
