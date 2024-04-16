@@ -34,11 +34,11 @@ jobs:
     - name: What is the event?
       run: |
         if [ ${{ github.event_name }} == 'pull_request' ]; then
-          echo "This is a pull request event"
+          echo "NEED = This is a pull request event"  >> "$GITHUB_ENV"
         elif [ ${{ github.event_name }} == 'push' ]; then
-          echo "This is a push event"
+          echo "NEED = This is a push event" >> "$GITHUB_ENV"
         elif [ ${{ github.event_name }} == 'workflow_dispatch' ]; then
-          echo "This is a workflow dispatch event"
+          echo "NEED = This is a workflow dispatch event" >> "$GITHUB_ENV"
         else
           echo ${{ github.event_name }}
         fi
