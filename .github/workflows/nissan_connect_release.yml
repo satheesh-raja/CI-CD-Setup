@@ -29,12 +29,12 @@ jobs:
     steps:
       - run: |
           echo "NEED=${{ inputs.buildvariant }}" >> "$GITHUB_ENV"
-          if: env.NEED == 'NissanEuPreProd'
-          echo "BuildVariant = EuPreProd" >> "$GITHUB_ENV"
-          # if: env.NEED == 'NissanEuProd'
-          # echo "BuildVariant = EuProd" >> "$GITHUB_ENV"
-          # if: env.NEED == 'EuProd'
-          # echo "Success"
+            if: env.NEED == 'NissanEuPreProd'
+            echo "BuildVariant = EuPreProd" >> "$GITHUB_ENV"
+            if: env.NEED == 'NissanEuProd'
+            echo "BuildVariant = EuProd" >> "$GITHUB_ENV"
+            if: env.NEED == 'EuProd'
+            echo "Success"
           
   # log-the-inputs:
   #   runs-on: ubuntu-latest
