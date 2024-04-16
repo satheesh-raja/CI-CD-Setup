@@ -33,7 +33,7 @@ jobs:
           LEVEL: ${{ inputs.buildvariant }}
       - name: Skip Deploy?
         if: env.NEED == 'NissanEuPreProd'
-        run: echo "Success"
+        run: echo $env.NEED
   # log-the-inputs:
   #   runs-on: ubuntu-latest
   #   steps:
