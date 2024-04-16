@@ -28,12 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-           echo "NEED=${{ inputs.buildvariant }}" >> "$GITHUB_ENV"
-        env:
-          LEVEL: ${{ inputs.buildvariant }}
-      - name: Skip Deploy?
-        if: env.NEED == 'NissanEuPreProd'
-        run: echo $env.NEED
+          echo "NEED=${{ inputs.buildvariant }}" >> "$GITHUB_ENV"
+          if: env.NEED == 'NissanEuPreProd'
+          echo "BuildVariant=${{ EuPreProd }}" >> "$GITHUB_ENV"
+          if: env.NEED == 'NissanEuProd'
+          echo "BuildVariant=${{ EuProd }}" >> "$GITHUB_ENV"
+          if: env.NEED == 'EuProd'
+          echo "Success"
+          
   # log-the-inputs:
   #   runs-on: ubuntu-latest
   #   steps:
