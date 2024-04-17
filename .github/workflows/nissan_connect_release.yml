@@ -30,21 +30,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Build Variant
-      id: select-build-variant
-      run: |
-        if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
-          echo "NEED = This is a push event" >> "$GITHUB_ENV"
-        elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
-          echo "NEED = This is a push event" >> "$GITHUB_ENV"
-        elif [ ${{ inputs.buildvariant }} == 'NissanUaePreProd' ]; then
-          echo "NEED = This is a workflow dispatch event" >> "$GITHUB_ENV"
-        fi
-    - name: Step 2
-      run: |
-        echo "BuildVariant is: ${{steps.select-build-variant.env.NEED}}"
+     - name: Step 1
+       run: |
+        echo "action_state=yellow" >> $GITHUB_ENV
+        echo "State is: '${{ env.action_state }}'" # No output since same step
+     - name: Step 2
+       run: |
+        echo "State is: '${{ env.action_state }}'" # Output works
+    # steps:
+    # - name: Checkout code
+    #   uses: actions/checkout@v3
+    # - name: Build Variant
+    #   id: select-build-variant
+    #   run: |
+    #     if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
+    #       echo "NEED = This is a push event" >> "$GITHUB_ENV"
+    #     elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
+    #       echo "NEED = This is a push event" >> "$GITHUB_ENV"
+    #     elif [ ${{ inputs.buildvariant }} == 'NissanUaePreProd' ]; then
+    #       echo "NEED = This is a workflow dispatch event" >> "$GITHUB_ENV"
+    #     fi
+    # - name: Step 2
+    #   run: |
+    #     echo "BuildVariant is: ${{steps.select-build-variant.env.NEED}}"
 # jobs:
 #   log-the-inputs:
 #     runs-on: ubuntu-latest
