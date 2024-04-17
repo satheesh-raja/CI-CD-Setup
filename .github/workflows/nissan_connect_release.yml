@@ -29,8 +29,14 @@ jobs:
     steps:
      - name: Step 1
        run: |
+         if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
           echo "action_state=yellow" >> $GITHUB_ENV
           echo "State is: '${{ env.action_state }}'" # No output since same step
+         elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
+          echo "action_state=blue" >> $GITHUB_ENV
+         elif [ ${{ inputs.buildvariant }} == 'NissanUaePreProd' ]; then
+          echo "action_state=green" >> $GITHUB_ENV
+         fi
      - name: Step 2
        run: |
         echo "State is: '${{ env.action_state }}'" # Output works
