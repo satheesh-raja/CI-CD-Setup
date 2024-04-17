@@ -23,38 +23,41 @@ on:
           - InfintiUkrPreProd
           - InfintiUkrProd
 # Where it will run
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#      - name: Step 1
+#        run: |
+#          if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
+#           echo "action_state=yellow" >> $GITHUB_ENV
+#           echo "State is: '${{ env.action_state }}'" # No output since same step
+#          elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
+#           echo "action_state=blue" >> $GITHUB_ENV
+#          elif [ ${{ inputs.buildvariant }} == 'NissanUaePreProd' ]; then
+#           echo "action_state=green" >> $GITHUB_ENV
+#          fi
+#      - name: Step 2
+#        run: |
+#         echo "State is: '${{ env.action_state }}'" # Output works
+    
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-     - name: Step 1
-       run: |
-         if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
-          echo "action_state=yellow" >> $GITHUB_ENV
-          echo "State is: '${{ env.action_state }}'" # No output since same step
-         elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
-          echo "action_state=blue" >> $GITHUB_ENV
-         elif [ ${{ inputs.buildvariant }} == 'NissanUaePreProd' ]; then
-          echo "action_state=green" >> $GITHUB_ENV
-         fi
-     - name: Step 2
-       run: |
-        echo "State is: '${{ env.action_state }}'" # Output works
-    
-# jobs:
-#   log-the-inputs:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - run: |
-#           echo "NEED=${{ inputs.buildvariant }}" >> "$GITHUB_ENV"
-#         if: env.NEED == 'NissanEuPreProd'
-#           echo "BuildVariant = EuPreProd" >> "$GITHUB_ENV"
-#       - name: condition1
-#         if: env.NEED == 'NissanEuProd'
-#         run:  echo "BuildVariant = EuProd" >> "$GITHUB_ENV"
-#       - name: condition2
-#         if: env.NEED == 'EuProd'
-#         run: echo "Success"
+    - name: Build Variant
+      run: |
+        if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
+          echo "NEED=This is a push event" >> "$GITHUB_ENV"
+        elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
+          echo "NEED=This is a push event" >> "$GITHUB_ENV"
+        elif [ ${{ inputs.buildvariant }} == 'NissanUaePreProd' ]; then
+          echo "NEED=This is a workflow dispatch event" >> "$GITHUB_ENV"
+        fi
+        echo "State is: '${{ env.NEED }}'"
+    - name: Step 2
+      run: |
+        echo "Build Variant: '${{ env.NEED }}'"
           
   # log-the-inputs:
   #   runs-on: ubuntu-latest
