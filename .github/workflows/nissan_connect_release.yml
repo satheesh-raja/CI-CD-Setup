@@ -29,7 +29,6 @@ jobs:
     steps:
 
     - name: Build Variant
-      id: select-build-variant
       run: |
         if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
           echo "NEED = This is a push event" >> "$GITHUB_ENV"
