@@ -22,9 +22,6 @@ on:
           - InfintiUaeProd
           - InfintiUkrPreProd
           - InfintiUkrProd
-env:
-  NEED: Satheesh
-
 # Where it will run
 jobs:
   build:
