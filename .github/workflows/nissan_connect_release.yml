@@ -22,6 +22,16 @@ on:
           - InfintiUaeProd
           - InfintiUkrPreProd
           - InfintiUkrProd
+      publishing_format:
+        type: choice
+        description: Select the Publishing Format
+        options:
+          - Android App Bundle(.aab)
+          - Android Application Package(.apk)
+      artifact:
+        description: Upload Build Artifact
+        required: false
+        type: boolean
 # Where it will run
 # jobs:
 #   build:
@@ -58,6 +68,13 @@ jobs:
     - name: Step 2
       run: |
         echo "Build Variant: '${{ env.NEED }}'"
+    - name: Upload a build Artifact
+      # Upload the build based on the artifact enabled in the custom workflow
+      if : ${{ inputs.artifact }} == 'true'}}
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        name: NissanConnect.aab
+        path: app/build/outputs/bundle/eue2eProdRelease/app-eue2e-prod-release.aab
           
   # log-the-inputs:
   #   runs-on: ubuntu-latest
