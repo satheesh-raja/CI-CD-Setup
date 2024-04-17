@@ -36,7 +36,6 @@ jobs:
       id: select-build-variant
       run: |
         if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
-          env:
           NEED : Dhinesh
         elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
           echo "NEED = This is a push event" >> "$GITHUB_ENV"
