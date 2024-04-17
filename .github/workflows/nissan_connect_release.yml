@@ -5,11 +5,7 @@ name : Nissan CI/CD Workflow
 on:
   workflow_dispatch:
     inputs:
-      tags:
-        description: 'Upload Build'
-        required: false
-        type: boolean
-        
+            
       buildvariant:
         type: choice
         description: Select the Build Variant
@@ -40,7 +36,8 @@ jobs:
       id: select-build-variant
       run: |
         if [ ${{ inputs.buildvariant }} == 'NissanEuPreProd' ]; then
-          echo "NEED = This is a pull request event"  >> "$GITHUB_ENV"
+          env:
+          NEED : Dhinesh
         elif [ ${{ inputs.buildvariant }} == 'NissanEuProd' ]; then
           echo "NEED = This is a push event" >> "$GITHUB_ENV"
         elif [ ${{ inputs.buildvariant }} == 'NissanUaePreProd' ]; then
