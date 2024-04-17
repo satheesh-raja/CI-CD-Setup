@@ -5,6 +5,11 @@ name : Nissan CI/CD Workflow
 on:
   workflow_dispatch:
     inputs:
+      tags:
+        description: 'Upload Build'
+        required: false
+        type: boolean
+        
       buildvariant:
         type: choice
         description: Select the Build Variant
@@ -21,6 +26,7 @@ on:
           - InfintiUaeProd
           - InfintiUkrPreProd
           - InfintiUkrProd
+      
 
 # Where it will run
 jobs:
