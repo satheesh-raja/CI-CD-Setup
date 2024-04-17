@@ -39,6 +39,7 @@ jobs:
         elif [ ${{ inputs.buildvariant }} == 'NissanUaePreProd' ]; then
           echo "NEED = This is a workflow dispatch event" >> "$GITHUB_ENV"
         fi
+        echo "State is: '${{ env.NEED }}'"
     - name: Step 2
       run: |
         echo "State is: '${{ env.NEED }}'"
