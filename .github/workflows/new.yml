@@ -40,7 +40,7 @@ jobs:
     steps:
     - name: Build Release
       run: |
-        echo "buildVariant=${{ inputs.brand }}${{ inputs.region }}${{ inputs.environment }} >> "$GITHUB_ENV"
+        echo "buildVariant=${{ inputs.brand }}${{ inputs.region }}${{ inputs.environment }}" >> "$GITHUB_ENV"
     - name: Echo Build Variant
       run: |
         echo ${{ env.buildVariant }}
