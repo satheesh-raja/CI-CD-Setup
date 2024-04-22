@@ -40,5 +40,5 @@ jobs:
     steps:
     - name: Build Release
       run: |
-        echo ${{ inputs.brand }}${{ inputs.region }}
+        echo ${{ inputs.brand }}${{ inputs.region }}${{ inputs.environment }}
           
