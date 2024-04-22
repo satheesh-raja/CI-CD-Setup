@@ -44,4 +44,4 @@ jobs:
     - name: Echo Build Variant
       run: |
         echo ${{ env.buildVariant }}
-          
+        echo ${{ github.ref_name }}
