@@ -1,0 +1,44 @@
+# When it will be triggered
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        type: choice
+        description: Select the brand
+        options:
+          - Nissan
+          - Infinti
+      region:
+        type: choice
+        description: Select the region
+        options:
+          - Eur
+          - Uae
+          - Asia
+          - Ukr
+          - Aus
+      environment:
+        type: choice
+        description: Select the environment
+        options:
+          - Int
+          - PreProd
+          - Prod
+      publishing_format:
+        type: choice
+        description: Select the Publishing Format
+        options:
+          - .aab
+          - .apk
+      artifact:
+        description: Upload Build Artifact
+        required: false
+        type: boolean
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Release
+      run: |
+        echo ${{ inputs.brand }}
+          
