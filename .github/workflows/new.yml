@@ -1,5 +1,9 @@
 # When it will be triggered
 on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
     inputs:
       brand:
