@@ -62,7 +62,7 @@ jobs:
           java-version : '17'
           distribution : 'adopt'
       - name: Run Lint
-        run: ./gradlew clean lint
+        run: ./gradlew lint
       - name: Check and report lint results
         uses: hidakatsuya/action-report-android-lint@v1.1.3
         with:
