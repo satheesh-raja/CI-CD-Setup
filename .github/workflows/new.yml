@@ -3,7 +3,7 @@ on:
   # push:
   #   branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ pull_checking ]
   workflow_dispatch:
     inputs:
       brand:
