@@ -58,6 +58,7 @@ jobs:
             echo "Before Merged"
             if: github.event.pull_request.merged == true
             echo "After Merged"
+          fi
 
   # lint:
   #   name: Run Lint
