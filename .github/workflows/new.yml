@@ -1,7 +1,7 @@
 # When it will be triggered
 on:
-  push:
-    branches: [ main ]
+  # push:
+  #   branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -54,10 +54,10 @@ jobs:
       run: |
           if [ ${{ github.event_name}} == 'push' ]; then
             echo "Push Request"
-          elif [ ${{ github.event_name}} == 'pull_request' ]; then
-            echo "Before Merged"
-            if: github.event.pull_request.merged == true
+          elif [ ${{ github.event_name}} == 'pull_request' && github.event.pull_request.merged == true ]; then 
             echo "After Merged"
+          else
+            echo "Default Branch"
           fi
 
   # lint:
