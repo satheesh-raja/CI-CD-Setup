@@ -3,12 +3,13 @@ on:
   # push:
   #   branches: [ pull_request_checking ]
   pull_request:
-    branches: main
-    types: closed
+    branches:
+    - 'feature/**'
+    # types: closed
     
 jobs:
   if-Windows-else:
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     runs-on: macos-latest
     steps:
       - name: condition 1
