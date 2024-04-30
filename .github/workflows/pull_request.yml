@@ -1,8 +1,10 @@
 # When it will be triggered
 on:
+  # push:
+  #   branches: [ pull_request_checking ]
   pull_request:
-    branches: [ pull_request_checking ]
-  
+    branches: main
+    types: closed
 jobs:
   if-Windows-else:
     runs-on: macos-latest
