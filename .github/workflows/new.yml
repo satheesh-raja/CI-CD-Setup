@@ -3,6 +3,6 @@ on:
   push:
     branches: [ main ]
 jobs:
-  call-workflow-passing-data:
+  Unit_Test:
     uses: ./.github/workflows/unit_test.yml
   
