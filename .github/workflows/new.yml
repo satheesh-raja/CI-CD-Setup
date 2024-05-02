@@ -4,5 +4,5 @@ on:
     branches: [ main ]
 jobs:
   call-workflow-passing-data:
-    uses: CI-CD-Setup/CI-CD-Setup/.github/workflows/unit_test.yml@main
+    uses: ./.github/workflows/unit_test.yml
   
