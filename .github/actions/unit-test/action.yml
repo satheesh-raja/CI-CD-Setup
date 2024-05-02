@@ -9,6 +9,7 @@ runs:
         java-version : '17'
         distribution : 'adopt'
     - name: Unit tests
+      shell: bash
       run: bash ./gradlew test
     - name: Unit tests results
       if: success() || failure()
