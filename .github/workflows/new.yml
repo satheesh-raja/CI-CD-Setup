@@ -7,8 +7,6 @@ jobs:
   Unit_Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
       - uses: ./.github/actions/unit-test
   Unit_Test1:
     runs-on: ubuntu-latest
