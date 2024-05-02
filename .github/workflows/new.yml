@@ -4,5 +4,7 @@ on:
     branches: [ main ]
 jobs:
   Unit_Test:
-    uses: ./.github/workflows/unit_test.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/setup-android-build
   
