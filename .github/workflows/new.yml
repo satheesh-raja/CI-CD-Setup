@@ -26,4 +26,4 @@ jobs:
     steps:
       - name: Checkout
         run : |
-          echo jobs.Unit_Test.status
+          echo jobs.status
