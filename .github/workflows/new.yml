@@ -26,4 +26,4 @@ jobs:
     steps:
       - name: Checkout
         run : |
-          echo jobs.status
+          echo job.status
