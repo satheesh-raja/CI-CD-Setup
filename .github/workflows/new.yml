@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        id: hello
         uses: actions/checkout@v1
       - uses: ./.github/actions/unit-test
-  
+  Unit_Test2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        run :
+          echo jobs.hello.status
