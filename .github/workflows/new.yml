@@ -7,17 +7,19 @@ jobs:
   Unit_Test:
     runs-on: ubuntu-latest
     steps:
+      - id: Unit_Test
       - uses: ./.github/actions/unit-test
   Unit_Test1:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        id: hello
+        id: Unit_Test1
         uses: actions/checkout@v1
       - uses: ./.github/actions/unit-test
   Unit_Test2:
+    needs: [Unit_Test, Unit_Test1]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        run :
-          echo jobs.hello.status
+        run : |
+          echo jobs.Unit_Test.status
