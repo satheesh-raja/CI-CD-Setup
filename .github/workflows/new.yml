@@ -7,7 +7,8 @@ jobs:
   Unit_Test:
     runs-on: ubuntu-latest
     steps:
-      - id: Unit_Test
+      - name: Checkout
+        id: Unit_Test
       - uses: ./.github/actions/unit-test
   Unit_Test1:
     runs-on: ubuntu-latest
