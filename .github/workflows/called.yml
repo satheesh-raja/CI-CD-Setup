@@ -24,4 +24,4 @@ jobs:
         run: echo "firstword=Hello" >> $GITHUB_OUTPUT
       - id: step2
         if: steps.step1.outcome == 'success'
-        run: echo "secondword=world" >> $GITHUB_OUTPUT
+        run: echo "secondword=Success" >> $GITHUB_OUTPUT
