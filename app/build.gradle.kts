@@ -3,6 +3,20 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+apply(plugin = "com.diffplug.spotless")
+configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+    // of course, we can get rid of the java setting if we completed to migrate from java to kotlin.
+    java {
+        targetExclude("**/*.Test.java")
+        target("**/src/**/*.java")
+        palantirJavaFormat("2.39.0").style("AOSP")
+    }
+    kotlin {
+        target("**/*.kt")
+        ktlint("1.0.1")
+    }
+}
+
 android {
     namespace = "com.example.myapplication"
     compileSdk = 34

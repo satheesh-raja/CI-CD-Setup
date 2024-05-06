@@ -2,16 +2,17 @@
 plugins {
     id("com.android.application") version "8.2.2" apply false
     id("org.jetbrains.kotlin.android") version "1.9.0" apply false
+    id("com.diffplug.spotless") version "6.25.0"
 }
 
 tasks.register("copyGitHooks", Copy::class.java) {
     description = "Copies the git hooks from /git-hooks to the .git folder."
     group = "git hooks"
-    from("$rootDir/scripts/pre-commit")
+    from("$rootDir/scripts/pre-commit-hook")
     into("$rootDir/.git/hooks/")
 }
 tasks.register("installGitHooks", Exec::class.java) {
-    description = "Installs the pre-commit git hooks from /git-hooks."
+    description = "Installs the pre-commit-hook git hooks from /git-hooks."
     group = "git hooks"
     workingDir = rootDir
     commandLine = listOf("chmod")
