@@ -1,17 +1,50 @@
 #!/bin/sh
 stagedFiles=$(git diff --staged --name-only)
 
-echo "Running spotless check"
+echo "
+===============
+|  Running spotless check...
+===============
+"
 ./gradlew spotlessApply
-echo "Spotless Check response code:" >$?
-if [ $? -eq 0 ]; then
-    echo "spotless check succeed"
-    for file in $stagedFiles; do
-        if test -f "$file"; then
-            git add $file
-        fi
-    done
+EXIT_CODE=$?
+if [ ${EXIT_CODE} -eq 0 ]; then
+  echo "*********************************************"
+  echo "           Spotless Check Succeed            "
+  echo "*********************************************"
+  for file in $stagedFiles; do
+    if test -f "$file"; then
+      git add $file
+    fi
+  done
 else
-    echo "spotless check failed" >&2
-    exit 1
+  echo "*********************************************"
+  echo "            Spotless Check Failed           "
+  echo "Please fix the above issues before committing"
+  echo "*********************************************"
+#  exit ${EXIT_CODE}
+fi
+
+echo "
+===============
+|  Running lint check...
+===============
+"
+./gradlew clean lint
+EXIT_CODE=$?
+if [ ${EXIT_CODE} -eq 0 ]; then
+  echo "*********************************************"
+  echo "           Lint Check Succeed            "
+  echo "*********************************************"
+  for file in $stagedFiles; do
+    if test -f "$file"; then
+      git add $file
+    fi
+  done
+else
+  echo "*********************************************"
+  echo "            Lint Check Failed           "
+  echo "Please fix the above issues before committing"
+  echo "*********************************************"
+  exit ${EXIT_CODE}
 fi
