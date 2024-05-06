@@ -25,7 +25,7 @@ jobs:
       - id: step2
         # if: steps.step1.outcome == 'success'
         run: | 
-          if [ steps.step1.outcome == 'success' ]; then
+          if [ ${{steps.step1.outcome}} == "success" ]; then
           echo "secondword=Success" >> $GITHUB_OUTPUT
           else
           echo "secondword=Failure" >> $GITHUB_OUTPUT
