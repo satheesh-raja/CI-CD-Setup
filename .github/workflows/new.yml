@@ -27,3 +27,15 @@ jobs:
       - name: Checkout
         run : |
           echo job.status
+  slack:
+    runs-on: ubuntu-latest
+    needs: Unit_Test2
+    steps:
+      - uses: 8398a7/action-slack@v3
+        with:
+          mention: 'C070PCJAW77'
+          fields: repo,commit,author,ref,workflow,job,took
+          text: 'Success'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
