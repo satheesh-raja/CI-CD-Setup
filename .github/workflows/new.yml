@@ -32,10 +32,6 @@ jobs:
     needs: Unit_Test2
     steps:
       - uses: rtCamp/action-slack-notify@v2
-        with:
-          mention: 'C070PCJAW77'
-          fields: repo,commit,author,ref,workflow,job,took
-          text: 'Success'
         env:
           SLACK_CHANNEL: general
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
