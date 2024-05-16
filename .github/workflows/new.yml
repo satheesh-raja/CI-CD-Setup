@@ -24,7 +24,7 @@ jobs:
       - name: Display Output
         run : |
           echo job.status
-          echo /tmp/keystore.txt
+          echo "${{ /tmp/keystore.txt }}"
   # Unit_Test2:
   #   needs: [Unit_Test, Unit_Test1]
   #   runs-on: ubuntu-latest
