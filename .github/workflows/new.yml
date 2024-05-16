@@ -24,7 +24,7 @@ jobs:
       - name: Display Output
         run : |
           echo job.status
-          echo ${{ secrets.${{env.PROJECT_NAME}} }}
+          echo ${{ secrets.env.PROJECT_NAME }}
   # Unit_Test2:
   #   needs: [Unit_Test, Unit_Test1]
   #   runs-on: ubuntu-latest
