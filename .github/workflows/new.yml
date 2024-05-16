@@ -24,8 +24,9 @@ jobs:
       - name: Display Output
         run : |
           echo job.Unit_Test1.status
+          echo ${{ env.PROJECT_NAME }}
           echo ${{ secrets.FIREBASE_JSON }}
-          echo secrets.env.PROJECT_NAME
+          echo ${{ secrets.${{ env.PROJECT_NAME }} }}
   # Unit_Test2:
   #   needs: [Unit_Test, Unit_Test1]
   #   runs-on: ubuntu-latest
