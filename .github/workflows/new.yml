@@ -20,7 +20,7 @@ jobs:
         # uses: actions/checkout@v1
         run: |
           echo "Unit_Test1"
-          echo "PROJECT_NAME=${{ toJson(secrets.CREDENTIAL_FILE_CONTENT_NCS_DEV) }}" >> "$GITHUB_OUTPUT"
+          echo "PROJECT_NAME=${{ toJson(secrets.FIREBASE_JSON) }}" >> "$GITHUB_OUTPUT"
       # - uses: ./.github/actions/unit-test
   Unit_Test2:
     needs: [Unit_Test, Unit_Test1]
