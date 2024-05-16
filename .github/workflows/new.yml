@@ -18,7 +18,9 @@ jobs:
       - name: Checkout
         id: Unit_Test1
         # uses: actions/checkout@v1
-        run: echo "Unit_Test1"
+        run: |
+          echo "Unit_Test1"
+          echo "PROJECT_NAME=${{ toJson(secrets.CREDENTIAL_FILE_CONTENT_NCS_DEV) }}" >> "$GITHUB_OUTPUT"
       # - uses: ./.github/actions/unit-test
   Unit_Test2:
     needs: [Unit_Test, Unit_Test1]
@@ -27,17 +29,18 @@ jobs:
       - name: Checkout
         run : |
           echo job.status
-  slack:
-    runs-on: ubuntu-latest
-    needs: Unit_Test2
-    steps:
-      - uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: general
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Post Content :rocket:'
-          SLACK_TITLE: Post Title
-          SLACK_USERNAME: rtCamp
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: always()
+          ${{ steps.Unit_Test1.outputs.PROJECT_NAME }}
+  # slack:
+  #   runs-on: ubuntu-latest
+  #   needs: Unit_Test2
+  #   steps:
+  #     - uses: rtCamp/action-slack-notify@v2
+  #       env:
+  #         SLACK_CHANNEL: general
+  #         SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+  #         SLACK_ICON: https://github.com/rtCamp.png?size=48
+  #         SLACK_MESSAGE: 'Post Content :rocket:'
+  #         SLACK_TITLE: Post Title
+  #         SLACK_USERNAME: rtCamp
+  #         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  #       if: always()
