@@ -21,7 +21,6 @@ jobs:
         run: |
           echo "Unit_Test1"
           echo "PROJECT_NAME=secrets.FIREBASE_JSON" >> "$GITHUB_ENV"
-          # echo "${{ secrets.FIREBASE_JSON }}" > /tmp/keystore.txt
       - name: Display Output
         run : |
           echo job.status
