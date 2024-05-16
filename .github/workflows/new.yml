@@ -29,7 +29,7 @@ jobs:
       - name: Checkout
         run : |
           echo job.status
-          ${{ steps.Unit_Test1.outputs.PROJECT_NAME }}
+          echo ${{ steps.Unit_Test1.outputs.PROJECT_NAME }}
   # slack:
   #   runs-on: ubuntu-latest
   #   needs: Unit_Test2
