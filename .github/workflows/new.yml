@@ -23,9 +23,9 @@ jobs:
           echo "PROJECT_NAME=FIREBASE_JSON" >> "$GITHUB_ENV"
       - name: Display Output
         run : |
-          echo job.status
+          echo job.Unit_Test1.status
           echo ${{ secrets.FIREBASE_JSON }}
-          echo ${{ secrets.env.PROJECT_NAME }}
+          echo secrets.env.PROJECT_NAME
   # Unit_Test2:
   #   needs: [Unit_Test, Unit_Test1]
   #   runs-on: ubuntu-latest
