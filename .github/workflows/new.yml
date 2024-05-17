@@ -2,28 +2,71 @@
 on:
   push:
     branches: [ main ]
-    
 jobs:
-  Unit_Test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        id: Unit_Test
-        # uses: actions/checkout@v1
-        run: echo "Unit_Test"
-      # - uses: ./.github/actions/unit-test
+  # Unit_Test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       id: Unit_Test
+  #       # uses: actions/checkout@v1
+  #       run: echo "Unit_Test"
+  #     # - uses: ./.github/actions/unit-test
   Unit_Test1:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         id: Unit_Test1
-        # uses: actions/checkout@v1
-        run: echo "Unit_Test1"
-      # - uses: ./.github/actions/unit-test
-  Unit_Test2:
-    needs: [Unit_Test, Unit_Test1]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
+        run: |
+          echo "Unit_Test1"
+          echo "PROJECT_NAME=FIREBASE_JSON" >> "$GITHUB_ENV"
+      - name: Fetch credential file
+        uses: ./.github/actions/base64-to-file
+        with:
+          secret: ${{ secrets.FIREBASE_JSON }}
+          filename: credential_file.json
+          destination-path: /home/runner/work/CI-CD-Setup/CI-CD-Setup
+      # - name: Run Workflow
+      #   id: write_file
+      #   uses: timheuer/base64-to-file@v1.2
+      #   with:
+      #     fileName: 'credential_file.json'
+      #     encodedString: ${{ secrets.FIREBASE_JSON }}
+
+      # - name: Some other step
+      #   uses: actions/someaction@master
+        
+      # - name: Fetch credential file
+      #   uses: davidSchuppa/base64Secret-toFile-action@v1
+      #   with:
+      #     secret: ${{ secrets.FIREBASE_JSON }}
+      #     filename: credential_file.json
+      #     destination-path: /home/runner/work/CI-CD-Setup/CI-CD-Setup
+      - name: Display Output
         run : |
-          echo job.status
+          echo job.Unit_Test1.status
+          echo ${{ env.PROJECT_NAME }}
+          echo ${{ secrets.FIREBASE_JSON }}
+          with:
+          filelocation: ${{ steps.write_file.outputs.filePath }}
+  # Unit_Test2:
+  #   needs: [Unit_Test, Unit_Test1]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       run : |
+  #         echo job.status
+  #         echo ${{ env.PROJECT_NAME }}
+  # slack:
+  #   runs-on: ubuntu-latest
+  #   needs: Unit_Test2
+  #   steps:
+  #     - uses: rtCamp/action-slack-notify@v2
+  #       env:
+  #         SLACK_CHANNEL: general
+  #         SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+  #         SLACK_ICON: https://github.com/rtCamp.png?size=48
+  #         SLACK_MESSAGE: 'Post Content :rocket:'
+  #         SLACK_TITLE: Post Title
+  #         SLACK_USERNAME: rtCamp
+  #         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  #       if: always()
