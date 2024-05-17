@@ -27,8 +27,8 @@ jobs:
           fileName: 'credential_file.json'
           encodedString: ${{ secrets.FIREBASE_JSON }}
 
-      - name: Some other step
-        uses: actions/someaction@master
+      # - name: Some other step
+      #   uses: actions/someaction@master
         
       # - name: Fetch credential file
       #   uses: davidSchuppa/base64Secret-toFile-action@v1
