@@ -21,6 +21,18 @@ jobs:
         run: |
           echo "Unit_Test1"
           echo "PROJECT_NAME=FIREBASE_JSON" >> "$GITHUB_ENV"
+      - name: Run Workflow
+        id: write_file
+        uses: timheuer/base64-to-file@v1.2
+        with:
+          fileName: 'credential_file.json'
+          encodedString: ${{ secrets.FIREBASE_JSON }}
+
+      - name: Some other step
+        uses: actions/someaction@master
+        with:
+          filelocation: ${{ steps.write_file.outputs.filePath }}
+      
       - name: Fetch credential file
         uses: davidSchuppa/base64Secret-toFile-action@v1
         with:
