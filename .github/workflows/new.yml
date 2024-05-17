@@ -49,13 +49,13 @@ jobs:
       #     secret: ${{ secrets.FIREBASE_JSON }}
       #     filename: credential_file.json
       #     destination-path: /home/runner/work/CI-CD-Setup/CI-CD-Setup
-      - name: Display Output
-        run : |
-          echo job.Unit_Test1.status
-          echo ${{ env.PROJECT_NAME }}
-          echo ${{ secrets.FIREBASE_JSON }}
-          with:
-          filelocation: ${{ steps.write_file.outputs.filePath }}
+      # - name: Display Output
+      #   run : |
+      #     echo job.Unit_Test1.status
+      #     echo ${{ env.PROJECT_NAME }}
+      #     echo ${{ secrets.FIREBASE_JSON }}
+      #     with:
+      #     filelocation: ${{ steps.write_file.outputs.filePath }}
   # Unit_Test2:
   #   needs: [Unit_Test, Unit_Test1]
   #   runs-on: ubuntu-latest
