@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Checkout
         id: Unit_Test1
-        # uses: actions/checkout@v1
+        uses: actions/checkout@v1
         run: |
           echo "Unit_Test1"
           echo "PROJECT_NAME=FIREBASE_JSON" >> "$GITHUB_ENV"
@@ -30,20 +30,20 @@ jobs:
 
       - name: Some other step
         uses: actions/someaction@master
-        with:
-          filelocation: ${{ steps.write_file.outputs.filePath }}
-      
-      - name: Fetch credential file
-        uses: davidSchuppa/base64Secret-toFile-action@v1
-        with:
-          secret: ${{ secrets.FIREBASE_JSON }}
-          filename: credential_file.json
-          destination-path: /home/runner/work/CI-CD-Setup/CI-CD-Setup
+        
+      # - name: Fetch credential file
+      #   uses: davidSchuppa/base64Secret-toFile-action@v1
+      #   with:
+      #     secret: ${{ secrets.FIREBASE_JSON }}
+      #     filename: credential_file.json
+      #     destination-path: /home/runner/work/CI-CD-Setup/CI-CD-Setup
       - name: Display Output
         run : |
           echo job.Unit_Test1.status
           echo ${{ env.PROJECT_NAME }}
           echo ${{ secrets.FIREBASE_JSON }}
+          with:
+          filelocation: ${{ steps.write_file.outputs.filePath }}
   # Unit_Test2:
   #   needs: [Unit_Test, Unit_Test1]
   #   runs-on: ubuntu-latest
