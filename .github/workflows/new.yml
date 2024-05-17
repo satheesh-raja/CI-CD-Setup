@@ -17,7 +17,6 @@ jobs:
     steps:
       - name: Checkout
         id: Unit_Test1
-        uses: actions/checkout@v1
         run: |
           echo "Unit_Test1"
           echo "PROJECT_NAME=FIREBASE_JSON" >> "$GITHUB_ENV"
