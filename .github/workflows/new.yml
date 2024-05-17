@@ -19,12 +19,20 @@ jobs:
         run: |
           echo "Unit_Test1"
           echo "PROJECT_NAME=FIREBASE_JSON" >> "$GITHUB_ENV"
-      - name: Fetch credential file
-        uses: davidSchuppa/base64Secret-toFile-action@v1
+      - name: Fetch credential file from secrets
+        id: fetch_credential_file
+        uses: timheuer/base64-to-file@v1
         with:
-          secret: ${{ secrets.FIREBASE_JSON }}
-          filename: credential_file.json
-          destination-path: /home/runner/work/CI-CD-Setup/CI-CD-Setup
+          encodedString: ${{ secrets.CREDENTIAL_FILE }}
+          fileName: 'credential_file.json'
+      - name: Move credential file to repository location
+        run: mv ${{ steps.fetch_credential_file.outputs.filePath }} /home/runner/work/CI-CD-Setup/CI-CD-Setup/
+      # - name: Fetch credential file
+      #   uses: davidSchuppa/base64Secret-toFile-action@v1
+      #   with:
+      #     secret: ${{ secrets.FIREBASE_JSON }}
+      #     filename: credential_file.json
+      #     destination-path: /home/runner/work/CI-CD-Setup/CI-CD-Setup
       # - name: Run Workflow
       #   id: write_file
       #   uses: timheuer/base64-to-file@v1.2
