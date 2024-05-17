@@ -23,7 +23,7 @@ jobs:
         id: fetch_credential_file
         uses: timheuer/base64-to-file@v1
         with:
-          encodedString: ${{ secrets.CREDENTIAL_FILE }}
+          encodedString: ${{ secrets.FIREBASE_JSON }}
           fileName: 'credential_file.json'
       - name: Move credential file to repository location
         run: mv ${{ steps.fetch_credential_file.outputs.filePath }} /home/runner/work/CI-CD-Setup/CI-CD-Setup/
