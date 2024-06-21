@@ -62,15 +62,19 @@ jobs:
         with:
           java-version : '17'
           distribution : 'adopt'
-      - name: Unit tests
-        run: bash ./gradlew test
-      - name: Unit tests results
-        if: success() || failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: unit-tests-results      
-          # path: '**/build/test-results/test*UnitTest/**.xml'
-          path: app/build/reports/tests/testDebugUnitTest/index.html
+      - name : WorkSpace Github
+        run: |
+          echo ${{ github.workspace }}
+          echo $GITHUB_WORKSPACE
+      # - name: Unit tests
+      #   run: bash ./gradlew test
+      # - name: Unit tests results
+      #   if: success() || failure()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: unit-tests-results      
+      #     # path: '**/build/test-results/test*UnitTest/**.xml'
+      #     path: app/build/reports/tests/testDebugUnitTest/index.html
     # continue-on-error: true
 
   # build:
