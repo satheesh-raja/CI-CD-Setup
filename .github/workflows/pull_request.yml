@@ -8,6 +8,7 @@ on:
 jobs:
   if-Windows-else:
     runs-on: macos-latest
+    if: ${{ !github.event.pull_request.draft }}
     steps:
       - name: condition 1
         if: runner.os == 'Windows'
