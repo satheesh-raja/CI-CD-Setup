@@ -66,6 +66,10 @@ jobs:
         run: |
           echo ${{ github.workspace }}
           echo $GITHUB_WORKSPACE
+      - name: Generate list using Markdown
+        run: |
+          echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+
       # - name: Unit tests
       #   run: bash ./gradlew test
       # - name: Unit tests results
