@@ -68,7 +68,7 @@ jobs:
           echo $GITHUB_WORKSPACE
       - name: Generate list using Markdown
         run: |
-          echo "### Hello world! :rocket:" >> $GITHUB_ENV
+          echo "### Hello world! :rocket:" >> ${{ inputs.buildvariant }}
 
       # - name: Unit tests
       #   run: bash ./gradlew test
